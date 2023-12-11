@@ -13,7 +13,7 @@
 
 </head>
 
-<body>
+<body onload="editarServicio()">
   <div class="container mt-5">
     <div class="form-control">
       <form class="row g-3">
@@ -50,7 +50,12 @@
         <div class="col-md-6">
           <label for="cantidad" class="form-label">precio Dolar</label>
           <input type="text" class="form-control" id="precioDolar" placeholder="">
-          <div id="predioDolarHelp" class="form-text"></div>
+          <div id="observaconesHelp" class="form-text"></div>
+        </div>
+        <div class="col-md-6">
+          <label for="cantidad" class="form-label">observacones</label>
+          <input type="text" class="form-control" id="observaciones" placeholder="">
+          <div id="observacionesHelp" class="form-text"></div>
         </div>
           <div class="col-12">
             <button type="button" class="btn btn-primary" id="btnActualizar">Actualizar</button>

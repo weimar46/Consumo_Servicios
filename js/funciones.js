@@ -1,5 +1,5 @@
-const url = 'https://api-servicio-k24k.onrender.com/servicios'
-//const url = 'http://localhost:8282/servicios '
+//const url = 'https://api-servicio-k24k.onrender.com/servicios'
+const url = 'http://localhost:8282/servicios '
 
 const regresarListar = () => {
     window.location.href = 'index.html';
@@ -47,6 +47,7 @@ const listarServicio = async () => {
                     '<td>' + servicio.fechaInicio + '</td>' +
                     '<td>' + servicio.fechaFin + '</td>' +
                     '<td>' + servicio.precioDolar + '</td>' +
+                    '<td>' + servicio.observaciones + '</td>' +
                     '<td> <button type="button" onclick="redireccionarEditar(\'' + objetoServicio + '\')" class="btn btn-success">Editar: servicio</button></td>' +
                     '<td> <button type="button" class="btn btn-danger btnEliminar" onclick="eliminarServicio(\'' + servicio.idServicio + '\');">Eliminar</button></td>' +
                     '</tr>';
@@ -66,6 +67,7 @@ const registrarServicios = () => {
     const fechaInicios = document.getElementById('fechaInicio').value
     const fechaFins = document.getElementById('fechaFin').value
     const precioDolars = document.getElementById('precioDolar').value
+    const observacioness = document.getElementById('observaciones').value
 
 
 
@@ -92,6 +94,9 @@ const registrarServicios = () => {
     else if (precioDolars == 0) {
         document.getElementById('precioDolarHelp').innerHTML = 'Dato requerido'
     }
+    else if (observacioness == 0) {
+        document.getElementById('observacionesHelp').innerHTML = 'Dato requerido'
+    }
      else {
         let servicio = {
             idServicio: idServicios,
@@ -100,7 +105,8 @@ const registrarServicios = () => {
             frecuenciaServicio: frecuenciaServicios,
             fechaInicio: fechaInicios,
             fechaFin: fechaFins,
-            precioDolar:precioDolars
+            precioDolar:precioDolars,
+            observaciones:observacioness
         }
 
         fetch(url, {
@@ -114,7 +120,7 @@ const registrarServicios = () => {
                 Swal.fire({
                     position: "center",
                     icon: "success",
-                    title: "membresia editada exitosamente",
+                    title: "editada exitosamente",
                     showConfirmButton: false,
                     timer: 1500
                 });
@@ -151,7 +157,7 @@ const eliminarServicio = async (idServicio) => {
         Swal.fire({
             position: "center",
             icon: "error",
-            title: "membresia eliminada exitosamente",
+            title: "eliminada exitosamente",
             showConfirmButton: false,
             timer: 1500
         });
@@ -181,6 +187,7 @@ const actualizarServicio = () => {
     const fechaInicios = document.getElementById('fechaInicio').value
     const fechaFins = document.getElementById('fechaFin').value
     const precioDolars = document.getElementById('precioDolar').value
+    const observacioness = document.getElementById('observaciones').value
 
 
     if (idServicios.length == 0) {
@@ -206,17 +213,19 @@ const actualizarServicio = () => {
     else if (precioDolars == 0) {
         document.getElementById('precioDolarHelp').innerHTML = 'Dato requerido'
     }
+    else if (observacioness == 0) {
+        document.getElementById('observacionesHelp').innerHTML = 'Dato requerido'
+    }
      else {
         let servicio = {
-            //derecha variables creadas con la S / izquierda los nombres de la base de datos
-            idServicio: idServicios, //lo primero es la clave, lo segundo es lo que se va a enviar.
+            idServicio: idServicios,
             nombreServicio: nombreServicios,
             precioServicio: precioServicios,
-            frecuenciaServicio:frecuenciaServicios,
+            frecuenciaServicio: frecuenciaServicios,
             fechaInicio: fechaInicios,
             fechaFin: fechaFins,
-            precioDolar:precioDolars
-
+            precioDolar:precioDolars,
+            observaciones:observacioness
         }
         //Fecth permite reaizar peticiones http a una url
         fetch(url, {
@@ -230,7 +239,7 @@ const actualizarServicio = () => {
                 Swal.fire({
                     position: "center",
                     icon: "success",
-                    title: "Donación actualizada exitosamente",
+                    title: "actualizada exitosamente",
                     showConfirmButton: false,
                     timer: 1500
                 });
@@ -255,8 +264,11 @@ const editarServicio = () => {
     document.getElementById('idServicio').value = urlparams.get('idServicio');
     document.getElementById('nombreServicio').value = urlparams.get('nombreServicio');
     document.getElementById('precioServicio').value = urlparams.get('precioServicio');
+    document.getElementById('frecuenciaServicio').value = urlparams.get('frecuenciaServicio');
     document.getElementById('fechaInicio').value = urlparams.get('fechaInicio');
     document.getElementById('fechaFin').value = urlparams.get('fechaFin');
+    document.getElementById('precioDolar').value = urlparams.get('precioDolar');
+    document.getElementById('observaciones').value = urlparams.get('observaciones');
 
 
 }
